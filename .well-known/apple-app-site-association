@@ -1,0 +1,18 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "9832H7K9P2.com.ourwallet.ourwallet" ],
+             "components": [
+               {
+                  "/": "/plaid/oauth/redirect/*",
+                  "comment": "OAuth Redirect for Plaid integration"
+               }
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "9832H7K9P2.com.ourwallet.ourwallet" ]
+   }
+}
