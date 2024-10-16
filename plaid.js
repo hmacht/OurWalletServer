@@ -1,8 +1,5 @@
 'use strict';
 
-// read env vars from .env file
-require('dotenv').config();
-
 const { Configuration, PlaidApi, Products, PlaidEnvironments, CraCheckReportProduct } = require('plaid');
 
 const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID;

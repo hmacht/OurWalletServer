@@ -1,8 +1,5 @@
 'use strict';
 
-// read env vars from .env file
-require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -35,7 +32,7 @@ function authenticateToken(req, res, next) {
 
 // Routes
 
-app.get('/api/v1/hello', function (request, response, next) {
+app.get('/', function (request, response, next) {
   Promise.resolve()
     .then(async function () {
       response.json({
