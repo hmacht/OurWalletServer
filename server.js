@@ -1,5 +1,8 @@
 'use strict';
 
+// read env vars from .env file
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
