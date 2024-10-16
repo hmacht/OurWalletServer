@@ -8,8 +8,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const plaid = require('./plaid');
 
-const APP_PORT = process.env.APP_PORT || 8000;
-
 const app = express();
 app.use(
   bodyParser.urlencoded({
@@ -18,10 +16,6 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
-
-const server = app.listen(APP_PORT, function () {
-  console.log('OurWallet server listening on port ' + APP_PORT);
-});
 
 // Middleware to check for the token in the Authorization header
 function authenticateToken(req, res, next) {
@@ -41,16 +35,19 @@ function authenticateToken(req, res, next) {
 
 // Routes
 
-app.get('/api/hello', function (request, response, next) {
+app.get('/api/v1/hello', function (request, response, next) {
   Promise.resolve()
     .then(async function () {
-      response.json({hello: 'Welcome to the OurWallet Server!'});
+      response.json({
+        hello: 'Welcome to the OurWallet Server!',
+        enviroment_variables_status: process.env.ENV_VARS_STATUS || 'NOT SETUP'
+      });
     })
     .catch(next);
 });
 
-app.get('/api/plaid/create_link_token', authenticateToken, plaid.createLinkToken);
-app.get('/api/plaid/exchange_token', authenticateToken, plaid.exchangeToken);
+app.get('/api/v1/plaid/create_link_token', authenticateToken, plaid.createLinkToken);
+app.get('/api/v1/plaid/exchange_token', authenticateToken, plaid.exchangeToken);
 
 app.use('/api', function (error, request, response, next) {
   console.log(error);
@@ -62,3 +59,6 @@ const formatError = (error) => {
     error: { ...error.data, status_code: error.status },
   };
 };
+
+// Export the app for Vercel
+module.exports = app;
