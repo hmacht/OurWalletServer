@@ -30,7 +30,6 @@ const PLAID_COUNTRY_CODES = (process.env.PLAID_COUNTRY_CODES || 'US').split(
 // at https://dashboard.plaid.com/team/api.
 const PLAID_REDIRECT_URI = process.env.PLAID_REDIRECT_URI || '';
 
-
 const configuration = new Configuration({
   basePath: PlaidEnvironments[PLAID_ENV],
   baseOptions: {
