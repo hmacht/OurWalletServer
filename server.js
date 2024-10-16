@@ -7,6 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const plaid = require('./plaid');
+const path = require('path');
 
 const app = express();
 app.use(
@@ -52,6 +53,13 @@ app.get('/api/v1/plaid/exchange_token', authenticateToken, plaid.exchangeToken);
 app.use('/api', function (error, request, response, next) {
   console.log(error);
   response.json(formatError(error.response));
+});
+
+// For apple Universal Links
+// Serve the apple-app-site-association file
+app.get('/.well-known/apple-app-site-association', function(request, response) {
+  response.setHeader('content-type', 'application/json ');
+  response.sendFile(__dirname +  '/.well-known/apple-app-site-association');
 });
 
 const formatError = (error) => {
