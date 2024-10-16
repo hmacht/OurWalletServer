@@ -34,7 +34,7 @@ function authenticateToken(req, res, next) {
   next();
 }
 
-// Routes
+// ** Routes **
 
 app.get('/', function (request, response, next) {
   Promise.resolve()
