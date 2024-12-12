@@ -65,6 +65,7 @@ app.get('/.well-known/apple-app-site-association', function(request, response) {
   response.sendFile(__dirname +  '/.well-known/apple-app-site-association');
 });
 
+// Formats Errors
 const formatError = (error) => {
   return {
     error: { ...error.data, status_code: error.status },
