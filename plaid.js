@@ -97,7 +97,39 @@ const plaid = {
       } catch (error) {
           next(error);
       }
-  }
+  },
+
+  // Function to get last 30 days of transactions
+  getTransactions: async (request, response, next) => {
+    try {
+      var { access_token } = request.query;
+      
+      if (!access_token) {
+        return response.status(400).json({ error: "missing access_token" });
+      }
+
+      const endDate = new Date();
+      const startDate = new Date();
+      startDate.setDate(endDate.getDate() - 35);
+
+      const formatDate = (date) => {
+          return date.toISOString().split('T')[0];
+      };
+
+      const plaidResponse = await client.transactionsGet({
+        access_token: access_token,
+        start_date: formatDate(startDate),
+        end_date: formatDate(endDate)
+      })
+      
+      const data = plaidResponse.data;
+
+      response.json({ latest_transactions: data.transactions });
+    } catch (error) {
+        console.log(error)
+        next(error);
+    }
+}
 };
 
 module.exports = plaid;

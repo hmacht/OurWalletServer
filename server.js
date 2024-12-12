@@ -34,8 +34,14 @@ function authenticateToken(req, res, next) {
   next();
 }
 
+app.use('/api', function (error, request, response, next) {
+  console.log(error);
+  response.json(formatError(error.response));
+});
+
 // ** Routes **
 
+// Test route
 app.get('/', function (request, response, next) {
   Promise.resolve()
     .then(async function () {
@@ -47,13 +53,10 @@ app.get('/', function (request, response, next) {
     .catch(next);
 });
 
+// Plaid Routes
 app.get('/api/v1/plaid/create_link_token', authenticateToken, plaid.createLinkToken);
 app.get('/api/v1/plaid/exchange_token', authenticateToken, plaid.exchangeToken);
-
-app.use('/api', function (error, request, response, next) {
-  console.log(error);
-  response.json(formatError(error.response));
-});
+app.get('/api/v1/plaid/transactions', authenticateToken, plaid.getTransactions);
 
 // For apple Universal Links
 // Serve the apple-app-site-association file
