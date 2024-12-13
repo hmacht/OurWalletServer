@@ -44,7 +44,7 @@ const configuration = new Configuration({
 const client = new PlaidApi(configuration);
 
 const plaid = {
-  // Function to create a Link Token
+  // Function to create a Link Token.
   createLinkToken: async (request, response, next) => {
       try {
         const { user_id } = request.query;
