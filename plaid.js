@@ -102,7 +102,7 @@ const plaid = {
   // Function to get last 30 days of transactions
   getTransactions: async (request, response, next) => {
     try {
-      var { access_token } = request.query;
+      var { access_token, account_id } = request.query;
       
       if (!access_token) {
         return response.status(400).json({ error: "missing access_token" });
@@ -115,11 +115,12 @@ const plaid = {
       const formatDate = (date) => {
           return date.toISOString().split('T')[0];
       };
-
+      
       const plaidResponse = await client.transactionsGet({
         access_token: access_token,
         start_date: formatDate(startDate),
-        end_date: formatDate(endDate)
+        end_date: formatDate(endDate),
+        ...(account_id ? { options: { account_ids: [account_id] } } : {})
       })
       
       const data = plaidResponse.data;
