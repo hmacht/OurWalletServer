@@ -17,6 +17,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to check for the token in the Authorization header
 function authenticateToken(req, res, next) {
@@ -51,6 +52,14 @@ app.get('/', function (request, response, next) {
       });
     })
     .catch(next);
+});
+
+app.get('/privacy-policy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'privacy-policy.html'));
+});
+
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'terms.html'));
 });
 
 // Plaid Routes
