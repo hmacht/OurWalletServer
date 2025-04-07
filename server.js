@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cookieParser());
 app.use(
   bodyParser.urlencoded({
