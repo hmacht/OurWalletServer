@@ -14,10 +14,12 @@ router.get('/password-reset', async (req, res) => {
     })
     if (!error) {
       return res.render('password-reset');
+    } else {
+      return res.status(401).json({ error: error.message });
     }
   }
 
-  return res.status(401).json({ error: error.message });
+  return res.status(401).json({ error: 'sorry, an error has occured :(' });
 });
 
 router.post('/password-reset', async (req, res) => {
