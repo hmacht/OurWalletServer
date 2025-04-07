@@ -6,7 +6,7 @@
 
 If you are part of the OpenWallet team or want to be you can open a PR! OurWallet is fully open source.
 
-### Things we use to build this thing 🏗️
+#### Things we use to build this thing 🏗️
 
 - **Email server:** [Resend](https://resend.com/)
 - **Database & Auth:** [Supabase](https://supabase.com/)
