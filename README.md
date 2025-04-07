@@ -8,6 +8,7 @@ If you are part of the OpenWallet team or want to be you can open a PR! OurWalle
 
 #### Things we use to build this thing 🏗️
 
+- **Hosted on**: [Vercel](https://vercel.com/)
 - **Email server:** [Resend](https://resend.com/)
 - **Database & Auth:** [Supabase](https://supabase.com/)
 - **Bank account and credit card connections:** [Plaid](https://plaid.com/)
